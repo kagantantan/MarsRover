@@ -1,6 +1,7 @@
 ﻿using MarsRover.Application.CommandHandlers;
 using MarsRover.Application.SpaceCenters;
 using MarsRover.Common;
+using MarsRover.Common.Exceptions;
 using MarsRover.Common.Order;
 using MarsRover.Domain.Interfaces;
 using MarsRover.Domain.Squads;
@@ -78,6 +79,22 @@ namespace MarsRover.Test
             _mockSquad.Setup(x => x.MoveForward()).Throws(new ArgumentOutOfRangeException("DestinationPoint"));
 
             Assert.Throws<ArgumentOutOfRangeException>("DestinationPoint", () => _sut.StartProcess());
+        }
+        [Fact]
+        public void ProcessFailedUnsupportedInstruction()
+        {
+            var newOrder = new Order()
+            {
+                Instructions = "B",
+                LandingPosition = new Position(1, 1),
+                Orientation = Orientation.N
+            };
+            _sut.SetOrder(newOrder);
+
+            _sut.SetSquad(_mockSquad.Object);
+
+            var ex = Assert.Throws<ArgumentException>(() => _sut.StartProcess());
+            Assert.NotNull(ex);
         }
     }
 }

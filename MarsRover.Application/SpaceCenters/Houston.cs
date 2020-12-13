@@ -59,7 +59,7 @@ namespace MarsRover.Application.SpaceCenters
                         _commandManager.Commands.Add(new MoveForwardCommand(Squad));
                         break;
                     default:
-                        throw new UnsupportedCommandException("Unsupported Command");
+                        throw new UnsupportedCommandException("Unsupported Instruction");
                 }
             }
         }
