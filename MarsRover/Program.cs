@@ -18,7 +18,7 @@ namespace MarsRover
         static int Main(string[] args)
         {
             var serviceProvider = new ServiceCollection()
-                .AddSingleton<IInputReader, ConsoleReader>()
+                .AddSingleton<IInputReader, AutomaticConsoleReader>()
                 .AddSingleton<ILandingSurface, MarsPlateau>()
                 .AddTransient<IReport, ConsoleReport>()
                 .AddTransient<IValidator, CustomValidator>()
