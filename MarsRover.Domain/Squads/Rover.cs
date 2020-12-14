@@ -5,6 +5,8 @@ namespace MarsRover.Domain.Squads
 {
     public class Rover : ISquad
     {
+        private readonly long _turningDegree = 90;
+        private readonly int _distance = 1;
         private readonly ILandingSurface _landingSurface;
         private readonly INavigationAdvisor _navigationAdvisor;
         private readonly IReport _report;
@@ -25,7 +27,7 @@ namespace MarsRover.Domain.Squads
         }
         public void MoveForward()
         {
-            var newPosition = _navigationAdvisor.CalculateDestinationPosition(CurrentPosition, CurrentOrientation, 1);
+            var newPosition = _navigationAdvisor.CalculateDestinationPosition(CurrentPosition, CurrentOrientation, _distance);
             ValidateToNewPosition(newPosition, "DestinationPoint");
             CurrentPosition = newPosition;
         }
@@ -35,12 +37,12 @@ namespace MarsRover.Domain.Squads
         }
         public void TurnLeft()
         {
-            var newOrientation = _navigationAdvisor.CalculateDestinationOrientation(CurrentOrientation, -90);
+            var newOrientation = _navigationAdvisor.CalculateDestinationOrientation(CurrentOrientation, -_turningDegree);
             CurrentOrientation = newOrientation;
         }
         public void TurnRight()
         {
-            var newOrientation = _navigationAdvisor.CalculateDestinationOrientation(CurrentOrientation, 90);
+            var newOrientation = _navigationAdvisor.CalculateDestinationOrientation(CurrentOrientation, _turningDegree);
             CurrentOrientation = newOrientation;
         }
         public void SendPositionReport()
