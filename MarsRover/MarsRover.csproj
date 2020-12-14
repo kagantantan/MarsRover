@@ -18,4 +18,10 @@
     <ProjectReference Include="..\MarsRover.Infrastructure\MarsRover.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Input.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
